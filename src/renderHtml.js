@@ -9,7 +9,7 @@ handlebars.registerHelper('removePeriods', function (selector) {
 	return selector.replace(/\./, '');
 });
 
-var renderHtml = function(options) {
+var renderHtml = function (options) {
 	var source = fs.readFileSync(options.htmlTemplate, 'utf8')
 	var template = handlebars.compile(source)
 

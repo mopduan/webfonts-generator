@@ -28,7 +28,7 @@ var DEFAULT_OPTIONS = {
 	htmlTemplate: TEMPLATES.html,
 	types: ['eot', 'woff', 'woff2'],
 	order: ['eot', 'woff2', 'woff', 'ttf', 'svg'],
-	rename: function(file) {
+	rename: function (file) {
 		return path.basename(file, path.extname(file))
 	},
 	formatOptions: {},
@@ -40,7 +40,7 @@ var DEFAULT_OPTIONS = {
 	normalize: true
 }
 
-var webfont = function(options, done) {
+var webfont = function (options, done) {
 	if (options.cssFontsPath) {
 		console.log('Option "cssFontsPath" is deprecated. Use "cssFontsUrl" instead.')
 		options.cssFontsUrl = options.cssFontsPath
@@ -64,9 +64,9 @@ var webfont = function(options, done) {
 	}
 
 	// Warn about using deprecated template options.
-	for(var key in options.templateOptions) {
+	for (var key in options.templateOptions) {
 		var value = options.templateOptions[key];
-		if(key === "baseClass") {
+		if (key === "baseClass") {
 			console.warn("[webfont-generator] Using deprecated templateOptions 'baseClass'. Use 'baseSelector' instead.");
 			options.templateOptions.baseSelector = "." + value;
 			delete options.templateOptions.baseClass;
@@ -88,7 +88,7 @@ var webfont = function(options, done) {
 		currentCodepoint++
 		return res
 	}
-	_.each(options.names, function(name) {
+	_.each(options.names, function (name) {
 		if (!options.codepoints[name]) {
 			options.codepoints[name] = getNextCodepoint()
 		}
@@ -96,15 +96,15 @@ var webfont = function(options, done) {
 
 	// TODO output
 	generateFonts(options)
-		.then(function(result) {
+		.then(function (result) {
 			if (options.writeFiles) writeResult(result, options)
 
-			result.generateCss = function(urls) {
+			result.generateCss = function (urls) {
 				return renderCss(options, urls)
 			}
 			done(null, result)
 		})
-		.catch(function(err) { done(err) })
+		.catch(function (err) { done(err) })
 }
 
 function writeFile(content, dest) {
@@ -113,7 +113,7 @@ function writeFile(content, dest) {
 }
 
 function writeResult(fonts, options) {
-	_.each(fonts, function(content, type) {
+	_.each(fonts, function (content, type) {
 		var filepath = path.join(options.dest, options.fontName + '.' + type)
 		writeFile(content, filepath)
 	})
