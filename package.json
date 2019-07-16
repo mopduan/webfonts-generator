@@ -1,5 +1,5 @@
 {
-  "name": "@shequfe/webfonts-generator",
+  "name": "shequfe-webfonts-generator",
   "version": "0.4.0",
   "description": "Generator of webfonts from svg icons",
   "main": "src/index.js",
